@@ -120,6 +120,18 @@ footer {
   margin-bottom: 0;
 }
 
+.tax-dollar-figure {
+  width: min(100vw - 32px, 1100px);
+  margin: 34px 50% 38px;
+  transform: translateX(-50%);
+}
+
+.tax-dollar-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .note {
   color: var(--ink) !important;
   font-weight: 700;
