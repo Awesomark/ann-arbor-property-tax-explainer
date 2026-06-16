@@ -43,15 +43,11 @@ select {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 24px;
-  align-items: end;
   margin-bottom: 18px;
 }
 
 .hero-copy {
-  max-width: 920px;
+  max-width: 980px;
 }
 
 .eyebrow {
@@ -82,6 +78,8 @@ h2 {
 }
 
 .lede,
+.article p,
+.calculator-copy p,
 .table-header p,
 footer {
   color: var(--muted);
@@ -95,12 +93,50 @@ footer {
 }
 
 .calculator,
+.article,
 .stat,
 .table-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(21, 29, 35, 0.92);
   box-shadow: var(--shadow);
+}
+
+.article {
+  max-width: 980px;
+  margin-bottom: 18px;
+  padding: 22px;
+}
+
+.article p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.article p:last-child {
+  margin-bottom: 0;
+}
+
+.calculator-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.calculator-copy {
+  max-width: 700px;
+}
+
+.calculator-copy h2 {
+  margin-bottom: 8px;
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1;
+}
+
+.calculator-copy p {
+  margin-bottom: 0;
 }
 
 .calculator {
@@ -258,7 +294,7 @@ a {
 }
 
 @media (max-width: 900px) {
-  .hero,
+  .calculator-section,
   .summary-grid {
     grid-template-columns: 1fr;
   }
