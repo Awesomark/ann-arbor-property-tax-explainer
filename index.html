@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Estimate how Michigan taxable-value inflation caps and Ann Arbor millage rates changed a homeowner's property taxes over time."
+    />
+    <title>Why Did My Ann Arbor Property Taxes Go Up?</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Ann Arbor property tax explainer</p>
+          <h1>Why did my Michigan property taxes go up?</h1>
+          <p class="lede">
+            Pick the year you bought your home and the taxable value from that year. This page
+            estimates how much of the tax change came from Michigan's taxable-value inflation cap
+            and how much came from Ann Arbor millage changes.
+          </p>
+        </div>
+
+        <form class="calculator" id="taxForm">
+          <label>
+            <span>Purchase year</span>
+            <select id="purchaseYear"></select>
+          </label>
+          <label>
+            <span>Taxable value when purchased</span>
+            <input id="purchaseValue" type="number" min="0" step="1000" value="50000" />
+          </label>
+        </form>
+      </section>
+
+      <section class="summary-grid" aria-live="polite">
+        <article class="stat">
+          <span id="currentYearLabel">2025 modeled tax</span>
+          <strong id="latestTax">$5,411</strong>
+          <small id="latestChange">$2,890 above purchase year</small>
+        </article>
+        <article class="stat">
+          <span>Inflation share</span>
+          <strong id="latestInflationShare">92.0%</strong>
+          <small>Taxable-value cap effect</small>
+        </article>
+        <article class="stat">
+          <span>Millage share</span>
+          <strong id="latestRateShare">8.0%</strong>
+          <small>Ann Arbor rate effect</small>
+        </article>
+      </section>
+
+      <section class="explainer">
+        <article>
+          <h2>How Michigan property taxes work</h2>
+          <p>
+            Michigan homes have a taxable value used for property taxes. After Proposal A, that
+            taxable value usually rises each year by the lesser of inflation or 5%, plus additions
+            and minus losses. When a property transfers ownership, taxable value can reset closer
+            to market value for the next tax year.
+          </p>
+        </article>
+        <article>
+          <h2>What this table isolates</h2>
+          <p>
+            This model assumes the home is not sold again and has no additions, losses, exemptions,
+            or assessment drops. It then applies Michigan's capped-value inflation multipliers and
+            Ann Arbor principal-residence millage rates to show the tax change from the purchase
+            year baseline.
+          </p>
+        </article>
+        <article>
+          <h2>How to read the shares</h2>
+          <p>
+            The inflation column asks: what if only taxable value changed and the purchase-year
+            millage stayed fixed? The millage column is the remaining effect of Ann Arbor's rate
+            changing. Negative millage shares mean rates offset part of the inflation-driven
+            increase.
+          </p>
+        </article>
+      </section>
+
+      <section class="table-card">
+        <div class="table-header">
+          <div>
+            <h2>Modeled Annual Property Taxes</h2>
+            <p id="baselineText">Baseline: 1995 taxable value $50,000, PRE millage 50.4221</p>
+          </div>
+          <button id="copyLink" type="button">Copy link</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>State inflation multiplier</th>
+                <th>Taxable value</th>
+                <th>Ann Arbor PRE millage</th>
+                <th>Modeled taxes</th>
+                <th>Increase from purchase year</th>
+                <th>Inflation share</th>
+                <th>Millage share</th>
+              </tr>
+            </thead>
+            <tbody id="taxRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        Sources:
+        <a href="https://www.a2gov.org/media/zktfd1ak/historical-millage-rates-1994-2025.pdf">City of Ann Arbor historical millage rates</a>,
+        <a href="https://www.michigan.gov/treasury/local/stc/bulletin/archive/stc/inflation-rate-multipliers">Michigan State Tax Commission inflation multipliers</a>,
+        and
+        <a href="https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-211-27a">Michigan Compiled Laws 211.27a</a>.
+        The published Ann Arbor table used here currently runs through 2025.
+      </footer>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
