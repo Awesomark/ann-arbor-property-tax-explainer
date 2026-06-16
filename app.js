@@ -177,8 +177,9 @@ function render() {
 
   document.getElementById("currentYearLabel").textContent = `${lastModeledYear} modeled tax`;
   document.getElementById("latestTax").textContent = money.format(latest.taxes);
-  document.getElementById("latestChange").textContent =
-    `${money.format(latest.increase)} from first full year of ownership (${startYear})`;
+  document.getElementById("latestChange").textContent = money.format(latest.increase);
+  document.getElementById("latestChangeLabel").textContent =
+    `from first full year of ownership (${startYear})`;
   document.getElementById("latestInflationAmount").textContent = money.format(latest.inflationDollars);
   document.getElementById("latestRateAmount").textContent = money.format(latest.millageDollars);
 
