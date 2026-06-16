@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Estimate how Michigan taxable-value inflation caps and local millage rates changed a homeowner's property taxes over time."
+    />
+    <title>Michigan Property Tax Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Look up your Michigan tax jurisdiction.</h1>
+        </div>
+      </section>
+
+      <section class="article">
+        <p>
+          This version uses statewide millage-rate data from 2005 through 2025. Choose your county,
+          city or township, village if applicable, and school district. For owner-occupied homes,
+          the calculator uses the principal-residence exemption (PRE) millage rate.
+        </p>
+        <p>
+          Because the statewide dataset begins in 2005, the first full year dropdown on this page
+          starts at 2005. The same caveats apply: sales, uncapping events, additions, losses, and
+          exemptions can make a real tax bill differ from this model.
+        </p>
+        <p>
+          To find your taxable value, use
+          <a href="https://bsaonline.com/MunicipalDirectory?returnUrl=%2fSiteSearch%2fAdvancedRecordSearch" target="_blank" rel="noopener noreferrer">BSA Online's municipal directory</a>
+          to locate your local property records.
+        </p>
+      </section>
+
+      <section class="calculator-section statewide-calculator">
+        <div class="calculator-copy">
+          <p class="eyebrow">Try it with your home</p>
+          <h2>Enter your location and baseline</h2>
+          <p id="dataStatus">Loading statewide millage rates...</p>
+        </div>
+        <form class="calculator location-form" id="taxForm">
+          <label>
+            <span>County</span>
+            <select id="countySelect"></select>
+          </label>
+          <label>
+            <span>City or township</span>
+            <select id="citySelect"></select>
+          </label>
+          <label>
+            <span>Village</span>
+            <select id="villageSelect"></select>
+          </label>
+          <label>
+            <span>School district</span>
+            <select id="schoolSelect"></select>
+          </label>
+          <label>
+            <span>First full year</span>
+            <select id="purchaseYear"></select>
+          </label>
+          <label>
+            <span>Taxable value that year</span>
+            <input id="purchaseValue" type="number" min="0" step="1000" value="50000" />
+          </label>
+        </form>
+      </section>
+
+      <section class="summary-grid" aria-live="polite">
+        <article class="stat">
+          <span id="currentYearLabel">2025 modeled tax</span>
+          <strong id="latestTax">$0</strong>
+          <small id="latestChange">$0 from first full year</small>
+        </article>
+        <article class="stat">
+          <span>Inflation share</span>
+          <strong id="latestInflationAmount">$0</strong>
+          <small><span id="latestInflationShare">0.0%</span> of the increase</small>
+        </article>
+        <article class="stat">
+          <span>Millage share</span>
+          <strong id="latestRateAmount">$0</strong>
+          <small><span id="latestRateShare">0.0%</span> of the increase</small>
+        </article>
+      </section>
+
+      <section class="table-card">
+        <div class="table-header">
+          <div>
+            <h2>Modeled Annual Property Taxes</h2>
+            <p id="baselineText">Choose a location to begin.</p>
+          </div>
+          <button id="copyLink" type="button">Copy link</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>State inflation multiplier</th>
+                <th>Taxable value</th>
+                <th>PRE millage</th>
+                <th>Modeled taxes</th>
+                <th>Increase from first full year</th>
+                <th>Inflation impact</th>
+                <th>Millage impact</th>
+              </tr>
+            </thead>
+            <tbody id="taxRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>
+        <a href="./">Return to the Ann Arbor calculator</a>. Statewide data is based on Michigan
+        total-rate reports compiled into the local millage-rate dataset.
+      </footer>
+    </main>
+
+    <script src="statewide.js"></script>
+  </body>
+</html>

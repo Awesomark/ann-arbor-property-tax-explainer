@@ -141,6 +141,8 @@ function buildRows(startYear, startingTaxableValue) {
         millage,
         taxes,
         increase,
+        inflationDollars,
+        millageDollars,
         inflationShare,
         rateShare,
       };
@@ -168,8 +170,8 @@ function render() {
           <td>${row.millage.toFixed(4)}</td>
           <td>${moneyExact.format(row.taxes)}</td>
           <td class="${signedClass(row.increase)}">${moneyExact.format(row.increase)}</td>
-          <td class="${signedClass(row.inflationShare)}">${pct(row.inflationShare)}</td>
-          <td class="${signedClass(row.rateShare)}">${pct(row.rateShare)}</td>
+          <td class="${signedClass(row.inflationDollars)}">${impactCell(row.inflationDollars, row.inflationShare)}</td>
+          <td class="${signedClass(row.millageDollars)}">${impactCell(row.millageDollars, row.rateShare)}</td>
         </tr>
       `
     )
@@ -179,7 +181,9 @@ function render() {
   document.getElementById("latestTax").textContent = money.format(latest.taxes);
   document.getElementById("latestChange").textContent =
     `${money.format(latest.increase)} from ${startYear}`;
+  document.getElementById("latestInflationAmount").textContent = money.format(latest.inflationDollars);
   document.getElementById("latestInflationShare").textContent = pct(latest.inflationShare);
+  document.getElementById("latestRateAmount").textContent = money.format(latest.millageDollars);
   document.getElementById("latestRateShare").textContent = pct(latest.rateShare);
 
   setUrlState(startYear, startingTaxableValue);
@@ -212,6 +216,10 @@ function initialize() {
   });
 
   render();
+}
+
+function impactCell(amount, share) {
+  return `<span class="impact-amount">${moneyExact.format(amount)}</span><small>${pct(share)}</small>`;
 }
 
 initialize();

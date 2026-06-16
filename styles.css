@@ -154,6 +154,10 @@ footer {
   padding: 18px;
 }
 
+.location-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 label {
   display: grid;
   gap: 7px;
@@ -265,6 +269,18 @@ td {
   white-space: nowrap;
 }
 
+td small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.impact-amount {
+  display: block;
+}
+
 thead th {
   position: sticky;
   top: 0;
@@ -319,6 +335,10 @@ a {
 @media (max-width: 900px) {
   .calculator-section,
   .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .location-form {
     grid-template-columns: 1fr;
   }
 
