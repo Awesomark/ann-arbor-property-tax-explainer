@@ -38,21 +38,8 @@ select {
   padding: 36px 0 42px;
 }
 
-.site-header {
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 54px;
-}
-
-.brand {
-  color: var(--ink);
-  font-size: 1.45rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
 .hero {
+  padding-top: 92px;
   margin-bottom: 22px;
   text-align: center;
 }
@@ -116,7 +103,7 @@ footer {
 
 .article {
   max-width: 900px;
-  margin-bottom: 64px;
+  margin: 0 auto 64px;
   padding: 0;
   border: 0;
 }
@@ -345,17 +332,12 @@ a {
     padding: 24px 0;
   }
 
-  .site-header {
-    min-height: 48px;
-    margin-bottom: 34px;
-  }
-
-  .brand {
-    font-size: 1.35rem;
-  }
-
   h1 {
     font-size: 2.75rem;
+  }
+
+  .hero {
+    padding-top: 36px;
   }
 
   .article {
