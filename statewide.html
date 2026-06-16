@@ -21,7 +21,7 @@
       <section class="calculator-section statewide-calculator">
         <div class="calculator-copy">
           <p class="eyebrow">Try it with your home</p>
-          <h2>Enter your location and baseline</h2>
+          <h2>Enter your location and current taxable value</h2>
           <div class="calculator-details">
             <p>
               This version uses statewide millage-rate data from 2005 through 2025. Choose your county,
@@ -30,8 +30,10 @@
             </p>
             <p>
               Because the statewide dataset begins in 2005, the first full year dropdown on this page
-              starts at 2005. The same caveats apply: sales, uncapping events, additions, losses, and
-              exemptions can make a real tax bill differ from this model.
+              starts at 2005. Enter your 2025 taxable value, and the calculator will estimate prior
+              taxable values by working backward through Michigan's inflation multipliers. The same
+              caveats apply: sales, uncapping events, additions, losses, and exemptions can make a
+              real tax bill differ from this model.
               The annual source PDFs are available from the
               <a href="https://www.michigan.gov/taxes/property/estimator/related/millage-rates" target="_blank" rel="noopener noreferrer">Michigan Department of Treasury's millage rates page</a>.
             </p>
@@ -72,7 +74,7 @@
             <select id="purchaseYear"></select>
           </label>
           <label>
-            <span>Taxable value that year</span>
+            <span>2025 taxable value</span>
             <input id="purchaseValue" type="number" min="0" step="1000" value="50000" />
           </label>
         </form>

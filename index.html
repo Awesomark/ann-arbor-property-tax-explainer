@@ -61,8 +61,7 @@
         <p>
           So how much of your tax bill increase is from inflation, and how much is from your tax
           rate increasing? Use the calculator below to find out. Put in the first full year you
-          owned your property and what the taxable value was for that year. That information can be
-          found on
+          owned your property and your 2025 taxable value. That information can be found on
           <a href="https://bsaonline.com/Home/MunicipalityHome?uid=283" target="_blank" rel="noopener noreferrer">Ann Arbor's BSA Online property records</a>.
         </p>
         <p>
@@ -80,10 +79,11 @@
       <section class="calculator-section">
         <div class="calculator-copy">
           <p class="eyebrow">Try it with your home</p>
-          <h2>Enter your purchase baseline</h2>
+          <h2>Enter your current taxable value</h2>
           <p>
-            The table will estimate how much of your tax bill increase came from Michigan's
-            inflation cap and how much came from Ann Arbor millage changes.
+            The table works backward from your 2025 taxable value to estimate how much of your tax
+            bill increase came from Michigan's inflation cap and how much came from Ann Arbor
+            millage changes.
           </p>
         </div>
         <form class="calculator" id="taxForm">
@@ -92,7 +92,7 @@
             <select id="purchaseYear"></select>
           </label>
           <label>
-            <span>Taxable value when purchased</span>
+            <span>2025 taxable value</span>
             <input id="purchaseValue" type="number" min="0" step="1000" value="50000" />
           </label>
         </form>
@@ -102,7 +102,7 @@
         <article class="stat">
           <span id="currentYearLabel">2025 modeled tax</span>
           <strong id="latestTax">$5,411</strong>
-          <small id="latestChange">$2,890 above purchase year</small>
+          <small id="latestChange">$2,890 from first full year</small>
         </article>
         <article class="stat">
           <span>Inflation increase</span>
@@ -118,7 +118,7 @@
         <div class="table-header">
           <div>
             <h2>Modeled Annual Property Taxes</h2>
-            <p id="baselineText">Baseline: 1995 taxable value $50,000, PRE millage 50.4221</p>
+            <p id="baselineText">2025 taxable value $50,000, estimated 1995 baseline, PRE millage 50.4221</p>
           </div>
           <button id="copyLink" type="button">Copy link</button>
         </div>
@@ -131,7 +131,7 @@
                 <th>Taxable value</th>
                 <th>Ann Arbor PRE millage</th>
                 <th>Modeled taxes</th>
-                <th>Increase from purchase year</th>
+                <th>Increase from first full year</th>
                 <th>Inflation impact</th>
                 <th>Millage impact</th>
               </tr>

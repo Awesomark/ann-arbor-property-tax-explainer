@@ -108,18 +108,23 @@ function setUrlState(year, value) {
   history.replaceState(null, "", url);
 }
 
-function buildRows(startYear, startingTaxableValue) {
+function taxableValueForYear(currentTaxableValue, year, latestYear) {
+  let taxableValue = currentTaxableValue;
+  for (let inflationYear = latestYear; inflationYear > year; inflationYear -= 1) {
+    taxableValue /= inflationMultipliers[inflationYear];
+  }
+  return taxableValue;
+}
+
+function buildRows(startYear, currentTaxableValue) {
+  const startTaxableValue = taxableValueForYear(currentTaxableValue, startYear, lastModeledYear);
   const baseMillage = annArborPreMillage[startYear];
-  const baseTax = (startingTaxableValue * baseMillage) / 1000;
-  let taxableValue = startingTaxableValue;
+  const baseTax = (startTaxableValue * baseMillage) / 1000;
 
   return availableYears
     .filter((year) => year >= startYear)
     .map((year) => {
-      if (year > startYear) {
-        taxableValue *= inflationMultipliers[year];
-      }
-
+      const taxableValue = taxableValueForYear(currentTaxableValue, year, lastModeledYear);
       const millage = annArborPreMillage[year];
       const taxes = (taxableValue * millage) / 1000;
       const inflationOnlyTax = (taxableValue * baseMillage) / 1000;
@@ -142,13 +147,15 @@ function buildRows(startYear, startingTaxableValue) {
 
 function render() {
   const startYear = parseNumber(purchaseYear.value, 1995);
-  const startingTaxableValue = parseNumber(purchaseValue.value, 50000);
-  const rows = buildRows(startYear, startingTaxableValue);
+  const currentTaxableValue = parseNumber(purchaseValue.value, 50000);
+  const rows = buildRows(startYear, currentTaxableValue);
   const baselineMillage = annArborPreMillage[startYear];
   const latest = rows[rows.length - 1];
+  const baseline = rows[0];
 
   baselineText.textContent =
-    `Baseline: ${startYear} taxable value ${money.format(startingTaxableValue)}, ` +
+    `${lastModeledYear} taxable value ${money.format(currentTaxableValue)}, ` +
+    `estimated ${startYear} taxable value ${money.format(baseline.taxableValue)}, ` +
     `PRE millage ${baselineMillage.toFixed(4)}`;
 
   taxRows.innerHTML = rows
@@ -175,7 +182,7 @@ function render() {
   document.getElementById("latestInflationAmount").textContent = money.format(latest.inflationDollars);
   document.getElementById("latestRateAmount").textContent = money.format(latest.millageDollars);
 
-  setUrlState(startYear, startingTaxableValue);
+  setUrlState(startYear, currentTaxableValue);
 }
 
 function initialize() {

@@ -145,18 +145,24 @@ function refreshYears(preferredYear = purchaseYear.value) {
   purchaseYear.value = String(years.includes(numericPreferred) ? numericPreferred : years[0]);
 }
 
-function buildRows(jurisdiction, startYear, startingTaxableValue) {
+function taxableValueForYear(currentTaxableValue, year, latestYear) {
+  let taxableValue = currentTaxableValue;
+  for (let inflationYear = latestYear; inflationYear > year; inflationYear -= 1) {
+    taxableValue /= inflationMultipliers[inflationYear];
+  }
+  return taxableValue;
+}
+
+function buildRows(jurisdiction, startYear, currentTaxableValue) {
   const rates = new Map(jurisdiction.rates.map(([year, preRate]) => [year, preRate]));
   const years = jurisdiction.rates.map(([year]) => year).filter((year) => year >= startYear);
+  const latestYear = years[years.length - 1];
+  const startTaxableValue = taxableValueForYear(currentTaxableValue, startYear, latestYear);
   const baseMillage = rates.get(startYear);
-  const baseTax = (startingTaxableValue * baseMillage) / 1000;
-  let taxableValue = startingTaxableValue;
+  const baseTax = (startTaxableValue * baseMillage) / 1000;
 
   return years.map((year) => {
-    if (year > startYear) {
-      taxableValue *= inflationMultipliers[year];
-    }
-
+    const taxableValue = taxableValueForYear(currentTaxableValue, year, latestYear);
     const millage = rates.get(year);
     const taxes = (taxableValue * millage) / 1000;
     const inflationOnlyTax = (taxableValue * baseMillage) / 1000;
@@ -182,14 +188,17 @@ function render() {
   if (!jurisdiction) return;
 
   const startYear = parseNumber(purchaseYear.value, jurisdiction.rates[0][0]);
-  const startingTaxableValue = parseNumber(purchaseValue.value, 50000);
-  const rows = buildRows(jurisdiction, startYear, startingTaxableValue);
+  const currentTaxableValue = parseNumber(purchaseValue.value, 50000);
+  const rows = buildRows(jurisdiction, startYear, currentTaxableValue);
   const latest = rows[rows.length - 1];
+  const baseline = rows[0];
   const villageText = jurisdiction.village ? `, ${jurisdiction.village}` : "";
 
   baselineText.textContent =
     `${jurisdiction.county} County, ${jurisdiction.city}${villageText}, ${jurisdiction.school}. ` +
-    `Baseline: ${startYear} taxable value ${money.format(startingTaxableValue)}, PRE millage ${rows[0].millage.toFixed(4)}`;
+    `${latest.year} taxable value ${money.format(currentTaxableValue)}, ` +
+    `estimated ${startYear} taxable value ${money.format(baseline.taxableValue)}, ` +
+    `PRE millage ${rows[0].millage.toFixed(4)}`;
 
   taxRows.innerHTML = rows
     .map(
@@ -213,7 +222,7 @@ function render() {
   document.getElementById("latestChange").textContent = `${money.format(latest.increase)} from ${startYear}`;
   document.getElementById("latestInflationAmount").textContent = money.format(latest.inflationDollars);
   document.getElementById("latestRateAmount").textContent = money.format(latest.millageDollars);
-  setUrlState(startYear, startingTaxableValue, jurisdiction);
+  setUrlState(startYear, currentTaxableValue, jurisdiction);
 }
 
 function setUrlState(year, value, jurisdiction) {

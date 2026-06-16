@@ -1,12 +1,15 @@
 # Ann Arbor Property Tax Explainer
 
-Static GitHub Pages site for modeling why an Ann Arbor homeowner's property taxes changed after purchase.
+Static GitHub Pages site for modeling why a Michigan homeowner's property taxes changed over time,
+working backward from their 2025 taxable value.
 
 ## Files
 
 - `index.html` - page structure and explainer copy
 - `styles.css` - responsive layout and table styling
 - `app.js` - Ann Arbor millage data, Michigan inflation multipliers, and calculator logic
+- `statewide.html` and `statewide.js` - statewide jurisdiction calculator
+- `millage-rates.json` - local statewide PRE millage-rate dataset
 
 ## Publish With GitHub Pages
 
