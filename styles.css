@@ -121,9 +121,8 @@ footer {
 }
 
 .tax-dollar-figure {
-  width: min(100vw - 32px, 1100px);
-  margin: 34px 50% 38px;
-  transform: translateX(-50%);
+  width: 66.666%;
+  margin: 34px auto 38px;
 }
 
 .tax-dollar-figure img {
