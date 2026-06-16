@@ -1,14 +1,14 @@
 :root {
-  color-scheme: light;
-  --ink: #15171a;
-  --muted: #8b8f94;
-  --paper: #ffffff;
-  --panel: #ffffff;
-  --panel-strong: #f6f6f4;
-  --line: #e5e5e2;
-  --green: #1f7a55;
-  --red: #9f3f37;
-  --blue: #2563eb;
+  color-scheme: dark;
+  --ink: #edf4f7;
+  --muted: #9eabb2;
+  --paper: #0d1216;
+  --panel: #151d23;
+  --panel-strong: #1d2830;
+  --line: #2b3943;
+  --green: #58d59f;
+  --red: #ff8177;
+  --blue: #84bdff;
   --shadow: none;
 }
 
@@ -19,7 +19,9 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--paper);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(132, 189, 255, 0.12), transparent 30rem),
+    var(--paper);
   color: var(--ink);
   font-family:
     Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
@@ -167,14 +169,14 @@ select {
   border: 1px solid var(--line);
   border-radius: 0;
   padding: 9px 11px;
-  background: #fff;
+  background: #0f151a;
   color: var(--ink);
 }
 
 input:focus,
 select:focus,
 button:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.18);
+  outline: 3px solid rgba(132, 189, 255, 0.22);
   border-color: var(--blue);
 }
 
@@ -232,7 +234,7 @@ button {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 12px;
-  background: #fff;
+  background: #111920;
   color: var(--ink);
   cursor: pointer;
   font-weight: 800;
@@ -268,7 +270,7 @@ thead th {
   top: 0;
   z-index: 1;
   background: var(--panel-strong);
-  color: #404348;
+  color: #d9e3e8;
   font-size: 0.78rem;
   line-height: 1.15;
   text-transform: uppercase;
@@ -281,11 +283,11 @@ thead th:first-child {
 }
 
 tbody tr:nth-child(even) {
-  background: #fbfbfa;
+  background: rgba(255, 255, 255, 0.025);
 }
 
 tbody tr:hover {
-  background: #f4f7ff;
+  background: rgba(132, 189, 255, 0.08);
 }
 
 .positive {
