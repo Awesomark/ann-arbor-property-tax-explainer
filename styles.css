@@ -248,15 +248,18 @@ button:hover {
 
 table {
   width: 100%;
-  min-width: 980px;
+  min-width: 780px;
   border-collapse: collapse;
 }
 
 th,
 td {
-  padding: 12px 14px;
+  padding: 10px 9px;
   border-bottom: 1px solid var(--line);
   text-align: right;
+}
+
+td {
   white-space: nowrap;
 }
 
@@ -267,7 +270,9 @@ thead th {
   background: var(--panel-strong);
   color: #404348;
   font-size: 0.78rem;
+  line-height: 1.15;
   text-transform: uppercase;
+  white-space: normal;
 }
 
 tbody th,
