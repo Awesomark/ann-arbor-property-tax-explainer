@@ -297,10 +297,6 @@ td small {
   font-weight: 700;
 }
 
-.impact-amount {
-  display: block;
-}
-
 thead th {
   position: sticky;
   top: 0;

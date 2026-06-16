@@ -46,11 +46,6 @@ const moneyExact = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-function pct(value) {
-  if (!Number.isFinite(value)) return "0.0%";
-  return `${value.toFixed(1)}%`;
-}
-
 function signedClass(value) {
   if (value < 0) return "negative";
   if (value > 0) return "positive";
@@ -168,8 +163,6 @@ function buildRows(jurisdiction, startYear, startingTaxableValue) {
     const increase = taxes - baseTax;
     const inflationDollars = inflationOnlyTax - baseTax;
     const millageDollars = taxes - inflationOnlyTax;
-    const inflationShare = increase === 0 ? 0 : (inflationDollars / increase) * 100;
-    const rateShare = increase === 0 ? 0 : (millageDollars / increase) * 100;
 
     return {
       year,
@@ -180,14 +173,8 @@ function buildRows(jurisdiction, startYear, startingTaxableValue) {
       increase,
       inflationDollars,
       millageDollars,
-      inflationShare,
-      rateShare,
     };
   });
-}
-
-function impactCell(amount, share) {
-  return `<span class="impact-amount">${moneyExact.format(amount)}</span><small>${pct(share)}</small>`;
 }
 
 function render() {
@@ -214,8 +201,8 @@ function render() {
           <td>${row.millage.toFixed(4)}</td>
           <td>${moneyExact.format(row.taxes)}</td>
           <td class="${signedClass(row.increase)}">${moneyExact.format(row.increase)}</td>
-          <td class="${signedClass(row.inflationDollars)}">${impactCell(row.inflationDollars, row.inflationShare)}</td>
-          <td class="${signedClass(row.millageDollars)}">${impactCell(row.millageDollars, row.rateShare)}</td>
+          <td class="${signedClass(row.inflationDollars)}">${moneyExact.format(row.inflationDollars)}</td>
+          <td class="${signedClass(row.millageDollars)}">${moneyExact.format(row.millageDollars)}</td>
         </tr>
       `
     )
@@ -225,9 +212,7 @@ function render() {
   document.getElementById("latestTax").textContent = money.format(latest.taxes);
   document.getElementById("latestChange").textContent = `${money.format(latest.increase)} from ${startYear}`;
   document.getElementById("latestInflationAmount").textContent = money.format(latest.inflationDollars);
-  document.getElementById("latestInflationShare").textContent = pct(latest.inflationShare);
   document.getElementById("latestRateAmount").textContent = money.format(latest.millageDollars);
-  document.getElementById("latestRateShare").textContent = pct(latest.rateShare);
   setUrlState(startYear, startingTaxableValue, jurisdiction);
 }
 
