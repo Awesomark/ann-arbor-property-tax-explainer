@@ -54,10 +54,12 @@ select {
 
 .hero {
   margin-bottom: 22px;
+  text-align: center;
 }
 
 .hero-copy {
   max-width: 900px;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -127,6 +129,11 @@ footer {
 
 .article p:last-child {
   margin-bottom: 0;
+}
+
+.note {
+  color: var(--ink) !important;
+  font-weight: 700;
 }
 
 .calculator-section {
