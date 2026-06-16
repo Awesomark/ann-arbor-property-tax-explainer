@@ -134,6 +134,11 @@ footer {
   padding-top: 8px;
 }
 
+.statewide-calculator {
+  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+}
+
 .calculator-copy {
   max-width: 720px;
 }
@@ -145,6 +150,20 @@ footer {
 }
 
 .calculator-copy p {
+  margin-bottom: 0;
+}
+
+.calculator-details {
+  margin-top: 16px;
+}
+
+.calculator-details p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.calculator-details p:last-child {
   margin-bottom: 0;
 }
 
@@ -256,6 +275,7 @@ table {
   width: 100%;
   min-width: 780px;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 th,
@@ -271,7 +291,7 @@ td {
 
 td small {
   display: block;
-  margin-top: 2px;
+  margin-top: 7px;
   color: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
@@ -291,6 +311,8 @@ thead th {
   line-height: 1.15;
   text-transform: uppercase;
   white-space: normal;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 tbody th,
